@@ -40,14 +40,17 @@ Open `predict.ipynb` and run the cells in order:
 
 1. **Cell 1**: Import libraries
 2. **Cell 2**: Load and explore the dataset
-3. **Cell 3**: Preprocess data, fill missing values, engineer features
+3. **Cell 3**: Preprocess data, **define target_game_id**, exclude it from training to prevent data leakage, engineer features (21 total)
 4. **Cell 4**: Summary of features used in model
-5. **Cell 5**: Create train/test split (80/20)
-6. **Cell 6**: Train Random Forest and Gradient Boosting models for away and home scores
-7. **Cell 7**: 5-fold cross-validation evaluation
-8. **Cell 8**: Make predictions for target game (2025_22_SEA_NE)
-9. **Cell 9**: Display model comparison and ensemble predictions
-10. **Cell 10**: Show feature importance for top factors
+5. **Cell 5**: Expanded Model Features (explanation)
+6. **Cell 6**: Create train/test split (80/20)
+7. **Cell 7**: Train Random Forest and Gradient Boosting models for away and home scores
+8. **Cell 8**: 5-fold cross-validation evaluation
+9. **Cell 9**: Understanding Cross-Validation Results (explanation)
+10. **Cell 10**: Display target game data from CSV (all columns and actual values)
+11. **Cell 11**: Generate ensemble predictions
+12. **Cell 12**: Display model comparison (Random Forest vs Gradient Boosting vs Ensemble)
+13. **Cell 13**: Show feature importance for away and home scores
 
 ## Model Performance
 
@@ -55,25 +58,25 @@ Open `predict.ipynb` and run the cells in order:
 
 | Target | Random Forest CV MAE | GB CV MAE | GB Improvement |
 |--------|---------------------|-----------|-----------------|
-| Away Score | 8.37 ± 0.29 | 8.11 ± 0.25 | -3.1% |
-| Home Score | 8.41 ± 0.16 | 8.15 ± 0.14 | -3.1% |
+| Away Score | 7.83 ± 0.23 | 7.72 ± 0.18 | -1.4% |
+| Home Score | 7.93 ± 0.23 | 7.80 ± 0.21 | -1.6% |
 
 **Note**: Gradient Boosting outperforms Random Forest on both targets. Total Score is calculated as Away + Home predictions (no separate model), ensuring mathematical consistency.
 
 ## Example Prediction
 
-For upcoming game `2025_22_SEA_NE` (Seattle Seahawks @ New England Patriots, Week 22):
+For game `2025_22_SEA_NE` (Seattle Seahawks @ New England Patriots, Week 22, Divisional):
 
-**Ensemble Predictions** (average of RF & GB with expanded features):
-- Away Team (SEA): **21.9 points**
-- Home Team (NE): **23.3 points**
-- Total Score: **45.2 points** (Away + Home)
+**Ensemble Predictions** (average of RF & GB):
+- Away Team (SEA): **25.1 points**
+- Home Team (NE): **20.8 points**
+- Total Score: **45.9 points** (Away + Home)
 
-*Features synthesized from recent games (2023+) since this is an upcoming matchup*
+*Note: This game was excluded from training set to prevent data leakage. Predictions use actual game features from CSV.*
 
 **Model Breakdown:**
-- Random Forest: SEA 20.7, NE 23.2, Total 43.9
-- Gradient Boosting: SEA 23.1, NE 23.4, Total 46.5
+- Random Forest: SEA 25.7, NE 21.1, Total 46.8
+- Gradient Boosting: SEA 24.6, NE 20.4, Total 45.1
 
 ## Key Insights
 
@@ -101,7 +104,21 @@ nfl-score-predict/
 └── pyproject.toml         # Python dependencies
 ```
 
+## Key Implementation Details
+
+**Data Leakage Prevention**: 
+- Target game ID is defined in Cell 3 before train/test split
+- Target game is extracted from original data before cleaning
+- Target game is excluded from training set during preprocessing
+- Original game data is preserved separately for reference and prediction
+
+**Feature Handling**:
+- Missing categorical values filled with 'Unknown' before encoding
+- Categorical features encoded using stored LabelEncoders from training
+- Missing numeric values filled with training data mean
+- All missing values handled before model prediction to avoid NaN errors
+
 ## Version History
 
-- **v2** (Current): Expanded features (+QB/coach/game_type/weekday/betting_odds), total score = Away + Home
+- **v2** (Current): Expanded features (+QB/coach/game_type/weekday/betting_odds), total score = Away + Home, data leakage prevention, CSV column reference
 - **v1**: Core features only (season, week, rest, temp, wind, teams, roof, surface)
