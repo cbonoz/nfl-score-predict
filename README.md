@@ -64,12 +64,16 @@ Open `predict.ipynb` and run the cells in order:
 
 For upcoming game `2025_22_SEA_NE` (Seattle Seahawks @ New England Patriots, Week 22):
 
-**Ensemble Predictions** (average of RF & GB):
-- Away Team (SEA): **~19.0 points**
-- Home Team (NE): **~21.6 points**
-- Total Score: **~40.6 points** (Away + Home)
+**Ensemble Predictions** (average of RF & GB with expanded features):
+- Away Team (SEA): **21.9 points**
+- Home Team (NE): **23.3 points**
+- Total Score: **45.2 points** (Away + Home)
 
 *Features synthesized from recent games (2023+) since this is an upcoming matchup*
+
+**Model Breakdown:**
+- Random Forest: SEA 20.7, NE 23.2, Total 43.9
+- Gradient Boosting: SEA 23.1, NE 23.4, Total 46.5
 
 ## Key Insights
 
