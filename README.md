@@ -65,7 +65,7 @@ Open `predict.ipynb` and run the cells in order:
 
 ## Example Prediction
 
-For game `2025_22_SEA_NE` (Seattle Seahawks @ New England Patriots, Week 22, Divisional):
+For game `2025_22_SEA_NE` (Seattle Seahawks @ New England Patriots, Week 22, Super Bowl):
 
 **Ensemble Predictions** (average of RF & GB):
 - Away Team (SEA): **25.1 points**
@@ -81,17 +81,17 @@ For game `2025_22_SEA_NE` (Seattle Seahawks @ New England Patriots, Week 22, Div
 ## Key Insights
 
 Top predictive features (by importance):
-1. Away team identity (17-18%)
-2. Season (15-16%)
-3. Week number (14-15%)
-4. Temperature (13-14%)
-5. Home team identity (11-12%)
+1. Team identity (away_team, home_team) - ~15-18% combined
+2. Season - ~12-16%
+3. Week number - ~8-12%
+4. Temperature - ~7-10%
+5. Rest days & Coaching - ~5-8% each
 
-**Why GB > QB importance is relatively low**: Teams have established scoring patterns; individual rest days matter less than seasonal trends and team composition.
+**Why QB/Coach importance is moderate**: Teams have established scoring patterns that dominate individual player performance. Seasonal trends and team composition are more predictive than individual week-to-week variations.
 
 **Total Score Calculation**: Total = Away Prediction + Home Prediction (ensures mathematical consistency and eliminates independent model bias).
 
-Lower R² values (0.03-0.05) reflect the inherent unpredictability of NFL outcomes due to numerous unmeasured variables (player injuries, play-calling adjustments, coaching changes, weather conditions on game day, etc.).
+Lower R² values reflect the inherent unpredictability of NFL outcomes due to numerous unmeasured variables (player injuries, play-calling adjustments, real-time coaching decisions, actual weather conditions on game day, referee decisions, etc.). Our MAE of ~7.7 points is interpretable in football context—a ~8 point prediction error is reasonable given the sport's high variance.
 
 ## Project Structure
 
