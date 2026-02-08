@@ -81,13 +81,17 @@ For game `2025_22_SEA_NE` (Seattle Seahawks @ New England Patriots, Week 22, Sup
 ## Key Insights
 
 Top predictive features (by importance):
-1. Team identity (away_team, home_team) - ~15-18% combined
-2. Season - ~12-16%
-3. Week number - ~8-12%
-4. Temperature - ~7-10%
-5. Rest days & Coaching - ~5-8% each
+1. Division game flag - ~14.3-14.5%
+2. Roof type - ~8.3-8.4%
+3. QB names (away & home) - ~7.9-8.2% combined
+4. Surface type - ~7.7-8.0%
+5. Temperature - ~6.9-7.0%
+6. Season - ~6.5-6.7%
+7. Betting odds - ~6.4-6.5%
+8. Week number - ~6.4-6.5%
+9. Wind - ~5.9-6.0%
 
-**Why QB/Coach importance is moderate**: Teams have established scoring patterns that dominate individual player performance. Seasonal trends and team composition are more predictive than individual week-to-week variations.
+**Key Finding**: Division games are the strongest predictor of scoring outcomes, likely reflecting rivalry intensity and familiarity between division opponents. Surprisingly, team identity itself doesn't appear in the top 10, suggesting stadium/environmental factors are more predictive than team composition alone.
 
 **Total Score Calculation**: Total = Away Prediction + Home Prediction (ensures mathematical consistency and eliminates independent model bias).
 
